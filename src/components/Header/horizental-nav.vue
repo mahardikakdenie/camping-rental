@@ -1,6 +1,6 @@
 <template>
   <div class="main-menu">
-    <DesktopMenu />
+  <DesktopMenu />
   </div>
 </template>
 <script>

@@ -3,12 +3,7 @@
     <li
       v-for="(item, i) in newMenulist"
       :key="i"
-      :class="
-        item.child
-          ? 'menu-item-has-children'
-          : '' || item.megamenu
-          ? 'menu-item-has-children has-megamenu'
-          : ''
+      :class="itemHasChild(item)|| itemHasMegaMenu(item)
       "
     >
       <router-link :to="item.link" v-if="!item.child && !item.megamenu">
@@ -45,9 +40,7 @@
             </div>
           </router-link>
 
-          <a href="javascript: void(0);" v-if="childitem.submenu">{{
-            childitem.childtitle
-          }}</a>
+          <a href="javascript: void(0);" v-if="childitem.submenu">{{ childitem.childtitle }}</a>
 
           <ul class="sub-menu" v-if="childitem.submenu">
             <li
@@ -119,6 +112,14 @@ export default {
         return Boolean(!item.isHeadr);
       });
     },
+  },
+  methods: {
+    itemHasChild(item) {
+      return item.child ? 'menu-item-has-children' : ''
+    },
+    itemHasMegaMenu(item) {
+      return item.megamenu ? 'menu-item-has-children has-megamenu' : ''
+    }
   },
 };
 </script>

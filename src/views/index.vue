@@ -1,68 +1,63 @@
 <template>
-	<Card title="Tabs">
-		<TabGroup>
-			<TabList
-				class="lg:space-x-8 md:space-x-4 space-x-0 rtl:space-x-reverse">
-				<Tab
-					v-slot="{ selected }"
-					as="template"
-					v-for="(item, i) in buttons"
-					:key="i">
-					<button
-						:class="[
-							selected
-								? 'text-primary-500 before:w-full'
-								: 'text-slate-500 before:w-0 dark:text-slate-300',
-						]"
-						class="inline-flex items-start text-sm font-medium mb-7 capitalize bg-white dark:bg-slate-800 ring-0 foucs:ring-0 focus:outline-none px-2 transition duration-150 before:transition-all before:duration-150 relative before:absolute before:left-1/2 before:bottom-[-6px] before:h-[1.5px] before:bg-primary-500 before:-translate-x-1/2">
-						<span
-							class="text-base relative top-[1px] ltr:mr-1 rtl:ml-1"
-							><Icon :icon="item.icon" /></span
-						>{{ item.title }}
-					</button>
-				</Tab>
-			</TabList>
-			<TabPanels>
-				<TabPanel>
-					<div
-						class="text-slate-600 dark:text-slate-400 text-sm font-normal">
-						Ini Home
+	<div>
+		<Card title="Product Collection">
+			<template #header>
+				<Button
+					text="Ketentuan Rental"
+					btnClass="bg-success-500 light text-success-500 btn-sm" />
+			</template>
+			<div class="">
+				<div class="grid grid-cols-4 gap-4">
+					<div v-for="(item, i) in statistics" :key="i">
+						<Card bodyClass="pt-4 pb-3 px-4">
+							<a href="#">
+								<img
+									class="rounded-t-lg"
+									:src="item.img"
+									alt="" />
+							</a>
+							<div class="p-5">
+								<a href="#">
+									<h5
+										class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+										{{ item.title }}
+									</h5>
+								</a>
+								<p
+									class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-sm">
+									Here are the biggest enterprise technology
+									acquisitions of 2021 so far, in reverse
+									chronological order.
+								</p>
+								<div class="w-100">
+									<Button
+										text="Rental Via Whatsapp"
+										style="width: 100%"
+										btnClass="bg-success-500 text-white"
+										@click="setModal('whatsapp')" />
+								</div>
+							</div>
+						</Card>
 					</div>
-				</TabPanel>
-				<TabPanel>
-					<div
-						class="text-slate-600 dark:text-slate-400 text-sm font-normal">
-						Aliqua id fugiat nostrud irure ex duis ea quis id quis
-						ad et. Sunt qui esse pariatur duis deserunt mollit
-						dolore cillum minim tempor enim.
-					</div>
-				</TabPanel>
-				<TabPanel
-					><div
-						class="text-slate-600 dark:text-slate-400 text-sm font-normal">
-						Aliqua id fugiat nostrud irure ex duis ea quis id quis
-						ad et. Sunt qui
-					</div></TabPanel
-				>
-				<TabPanel
-					><div
-						class="text-slate-600 dark:text-slate-400 text-sm font-normal">
-						Aliqua id fugiat nostrud irure ex duis ea quis id quis
-						ad et. Sunt qui esse pariatur duis deserunt mollit
-						dolore cillum minim tempor enim. Elit aute irure tempor
-						cupidatat incididunt sint deserunt ut voluptate aute id
-						deserunt nisi.
-					</div></TabPanel
-				>
-			</TabPanels>
-		</TabGroup>
-	</Card>
+				</div>
+			</div>
+		</Card>
+		<div class="modals">
+			<RentModal
+				:show="showRentWAModal"
+				sizeClass="max-w-5xl"
+				@close="setModal('whatsapp')" 
+			/>
+		</div>
+	</div>
 </template>
 
 <script setup>
 import Card from '@/components/Card';
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import Icon from '@/components/Icon';
+import Button from '@/components/Button';
+import RentModal from '@/components/Custom/modal/Rent.vue';
+import { ref } from 'vue';
 const buttons = [
 	{
 		title: 'Home',
@@ -81,4 +76,39 @@ const buttons = [
 		icon: 'heroicons-outline:cog',
 	},
 ];
+
+const statistics = ref([
+	{
+		title: 'Inova Zenix',
+		img: 'https://www.bastianrental.com/wp-content/uploads/2023/01/zenixpng.png',
+	},
+	{
+		title: 'Wulling Air',
+		img: 'https://www.bastianrental.com/wp-content/uploads/2023/01/air-ev-long-2.png',
+	},
+	{
+		title: 'Suzuki Jimmy',
+		img: 'https://www.bastianrental.com/wp-content/uploads/2023/01/Jimny-Green-1.png',
+	},
+	{
+		title: 'RAIZE',
+		img: 'https://www.bastianrental.com/wp-content/uploads/2021/06/raize12.png',
+	},
+	{
+		title: 'ALPHARD',
+		img: 'https://www.bastianrental.com/wp-content/uploads/2020/01/sewa-mobil-di-bali-alphard.gif',
+	},
+]);
+
+const showRentWAModal = ref(false);
+const setModal = (type) => {
+	switch (type) {
+		case 'whatsapp':
+			showRentWAModal.value = !showRentWAModal.value;
+			break;
+		default:
+			break;
+	}
+};
+import userImg from '@/assets/images/all-img/user.png';
 </script>

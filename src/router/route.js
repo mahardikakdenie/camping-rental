@@ -2,13 +2,23 @@ const routes = [
   {
     path: "/",
     name: "Layout",
-    redirect: "/home",
+    redirect: "/",
     component: () => import("@/Layout/index.vue"),
     children: [
       {
-        path: "/home",
+        path: "/",
         name: "home",
-        component: () => import("@/views/index.vue"),
+        component: () => import("@/views/index.vue"), meta: {
+          groupParent: "components",
+        },
+      },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('@/views/Profile.vue'),
+        meta: {
+          groupParent: "Product"
+        }
       },
     ],
   },

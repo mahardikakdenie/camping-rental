@@ -1,16 +1,16 @@
 <template>
   <div class="md:mb-6 mb-4 flex space-x-3 rtl:space-x-reverse">
-    <h4
+    <h6
       v-if="this.$route.name && !this.$route.meta.groupParent"
       :class="
         this.$route.meta.groupParent
           ? 'lg:border-r lg:border-secondary-500'
           : ''
       "
-      class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
+      class="font-medium text-sm capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
     >
       {{ this.$route.name.replace("-", " ") }}
-    </h4>
+    </h6>
     <ul class="breadcrumbs" v-if="this.$route.meta.groupParent">
       <li class="text-primary-500">
         <router-link :to="{ name: 'home' }" class="text-lg">
